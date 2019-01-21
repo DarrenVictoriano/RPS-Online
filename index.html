@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <title>RPS Online</title>
+</head>
+
+<body>
+    <!-- Title -->
+    <div class="jumbotron jumbotron-fluid text-center py-4">
+        <div class="container">
+            <h1 class="display-4">RPS Online</h1>
+            <p class="lead">This is an interactive Rock Paper Scissor game.</p>
+        </div>
+
+        <!-- Score -->
+        <div class="container">
+            Score:
+        </div>
+    </div>
+
+    <!-- The Game -->
+    <div class="row p-0 m-0 mt-2">
+
+        <!-- Player 1 -->
+        <div class="col-sm-5 text-center">
+            <div class="row">
+                <!-- Name -->
+                <div class="col-sm-12 text-center p-0 mb-3 player-name-container">
+                    <p id="player1">Player 1</p>
+                    <form class="form-inline form-name">
+                        <div class="form-group mx-auto p-0">
+                            <input type="text" class="form-control" id="player1-name-txt" placeholder="Enter Name">
+                            <button class="btn btn-primary ml-3" id="player1-name-btn">Enter Game</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Game -->
+                <div class="col-sm-2 text-center">
+                    <div class="action-btn-border">
+                        <div class="fas fa-hand-rock action-btn" data-fa-transform="rotate-90" data-action="r"></div>
+                    </div>
+
+                    <div class="action-btn-border">
+                        <div class="fas fa-hand-paper action-btn" data-fa-transform="rotate-90" data-action="p"></div>
+                    </div>
+
+                    <div class="action-btn-border">
+                        <div class="fas fa-hand-scissors action-btn" data-fa-transform="flip-h" data-action="s"></div>
+                    </div>
+                </div>
+                <div class="col-sm-10 text-center">
+                    <div class="border border-dark rounded action-image-div">
+                        <div class="fas fa-hand-scissors action-icon-selected" data-fa-transform="flip-h"></div>
+                    </div>
+                </div>
+
+                <!-- Ready -->
+                <div class="col-sm-12 text-center p-0 mt-3 ready-player1">
+                    <button class="btn btn-primary ml-3" id="ready-player1-btn">Ready</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 text-center m-0 p-0">
+            middle
+        </div>
+
+        <!-- Player 2 -->
+        <div class="col-sm-5 text-center">
+            <div class="row">
+                <!-- Name -->
+                <div class="col-sm-12 text-center p-0 mb-3  player-name-container">
+                    <p id="player2">Player 2</p>
+                    <form class="form-inline form-name">
+                        <div class="form-group mx-auto p-0">
+                            <input type="text" class="form-control" id="player2-name-txt" placeholder="Enter Name">
+                            <button class="btn btn-primary ml-3" id="player2-name-btn">Enter Game</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Game -->
+                <div class="col-sm-10 text-center">
+                    <div class="border border-dark rounded action-image-div">
+                        <div class="fas fa-hand-scissors action-icon-selected" data-fa-transform="" data-action="r"></div>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div class="action-btn-border">
+                        <div class="fas fa-hand-rock action-btn" data-fa-transform="rotate-90 flip-h" data-action="p"></div>
+                    </div>
+
+                    <div class="action-btn-border">
+                        <div class="fas fa-hand-paper action-btn" data-fa-transform="rotate-90 flip-h" data-action="s"></div>
+                    </div>
+
+                    <div class="action-btn-border">
+                        <div class="fas fa-hand-scissors action-btn"></div>
+                    </div>
+                </div>
+
+                <!-- Ready -->
+                <div class="col-sm-12 text-center p-0 mt-3 ready-player1">
+                    <button class="btn btn-primary ml-3" id="ready-player1-btn">Ready</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The Chat box -->
+    <div class="row p-0 m-0">
+
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+        crossorigin="anonymous"></script>
+    <!-- My JS -->
+    <script src="./assets/javascript/script.js"></script>
+</body>
+
+</html>
