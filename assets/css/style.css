@@ -1,0 +1,48 @@
+body {
+    background-color: #e8ecef;
+    max-width: 100%;
+}
+
+.action-btn-border {
+    width: 60px;
+    height: 60px;
+    padding-top: 8px;
+    margin-bottom: 10px;
+    border: solid 2px #000000;
+    border-radius: 50%;
+}
+.action-btn-border.disabled {
+    background-color: #fff;
+    border: solid 2px gray;
+}
+
+.action-btn {
+    font-size: 40px;
+    color: #000;
+}
+.action-btn.disabled {
+    color: gray;
+}
+
+.action-btn-border:hover .action-btn {
+    color: gray;
+}
+
+.action-btn-border:hover {
+    background-color: #fff;
+    border: solid 2px gray;
+}
+
+.action-image-div {
+    min-height: 200px;
+    background-color: #fff;
+}
+
+.action-icon-selected {
+    font-size: 200px;
+}
+
+.player-name-container {
+    min-height: 78px;
+}
+
