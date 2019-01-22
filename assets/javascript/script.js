@@ -116,3 +116,14 @@ db.ref().on("value", function (snap) {
     showLogs("there's an error on value event");
     showLogs(err);
 });
+
+db.ref(".info/connected").on("value", function (snap) {
+    // detects if user is connected to database
+    if (snap.val() === true) {
+        showLogs("connected");
+    } else {
+        showLogs("not connected");
+    }
+}, function (err) {
+    showLogs(err);
+});
