@@ -25,7 +25,6 @@ function showLogs(str) {
 function isPlayerNameNull(player, number) {
     // check if playerName is null
     // this is just to prevent firebase store undefined
-    showLogs("isPlayerNameNull running");
 
     if (player === undefined || player === "" || player === null) {
         showLogs("player name is empty, default name will be: anonymous player" + number);
@@ -36,14 +35,16 @@ function isPlayerNameNull(player, number) {
     }
 }
 
-function toggleEnterGameForm() {
+function hideEnterGameForm(player) {
     // this functions hides the Enter Game Button and Textbox
-    showLogs("toggleEnterGameForm initiated");
-    $("#player1-name-txt").toggle();
-    $("#player1-name-btn").toggle();
-    $("#player2-name-txt").toggle();
-    $("#player2-name-btn").toggle();
-    showLogs("enter btn and textbox now hidden");
+    $("#" + player + "-name-btn").hide();
+    $("#" + player + "-name-txt").hide();
+}
+
+function showEnterGameForm(player) {
+    // this functions hides the Enter Game Button and Textbox
+    $("#" + player + "-name-btn").show();
+    $("#" + player + "-name-txt").show();
 }
 
 function resetPlayerNames() {
@@ -55,15 +56,17 @@ function resetPlayerNames() {
     showLogs("player.names are set to null!");
 }
 
-function catchFirebasePlayerName(player) {
+function isPlayerOnline(name, player) {
     // this handles the empty name in firebase
     // it returns waiting for a player instead of a null value
-    if (player === "") {
+    if (name === "") {
         showLogs("No active player, Waiting for player now initiated");
+        showEnterGameForm(player);
         return "Waiting for a Player";
     } else {
-        showLogs(player + " entered the game");
-        return player;
+        // hide the enter game field when user is online
+        hideEnterGameForm(player);
+        return name;
     }
 }
 
@@ -100,15 +103,14 @@ $(".enter-game-btn").on("click", function (e) {
 
         // logs for degubbing
         showLogs("Player2 name: " + isPlayerNameNull(player2Name, 2));
+
     }
-    // hide enter game field after a player entered the game
-    toggleEnterGameForm();
 });
 
 db.ref().on("value", function (snap) {
     // show player names, cathirebase
-    $("#player1").text(catchFirebasePlayerName(snap.val().player1.name));
-    $("#player2").text(catchFirebasePlayerName(snap.val().player2.name));
+    $("#player1").text(isPlayerOnline(snap.val().player1.name, "player1"));
+    $("#player2").text(isPlayerOnline(snap.val().player2.name, "player2"));
 
 }, function (err) {
     showLogs("there's an error on value event");
