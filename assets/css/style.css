@@ -8,20 +8,20 @@ body {
     height: 60px;
     padding-top: 8px;
     margin-bottom: 10px;
-    border: solid 2px #000000;
     border-radius: 50%;
-}
-.action-btn-border.disabled {
     background-color: #fff;
     border: solid 2px gray;
+}
+.action-btn-border.active-action-btn {
+    border: solid 2px #000000;
 }
 
 .action-btn {
     font-size: 40px;
-    color: #000;
-}
-.action-btn.disabled {
     color: gray;
+}
+.action-btn.active-action-btn {
+    color: #000;
 }
 
 .action-btn-border:hover .action-btn {
