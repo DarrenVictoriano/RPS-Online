@@ -11,6 +11,8 @@ firebase.initializeApp(config);
 
 // Initialize Globals
 let db = firebase.database();
+let player1Name = "";
+let player2Name = "";
 let logsSwitch = true;
 
 // Game Functions
@@ -20,6 +22,20 @@ function showLogs(str) {
         console.log(str)
     }
     return;
+}
+
+function readCookie(name) {
+    // read the stored cookie
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) {
+            return c.substring(nameEQ.length, c.length);
+        }
+    }
+    return null;
 }
 
 function isPlayerNameNull(player, number) {
@@ -37,8 +53,12 @@ function isPlayerNameNull(player, number) {
 
 function hideEnterGameForm(player) {
     // this functions hides the Enter Game Button and Textbox
-    $("#" + player + "-name-btn").hide();
-    $("#" + player + "-name-txt").hide();
+    // $("#" + player + "-name-btn").hide();
+    // $("#" + player + "-name-txt").hide();
+    $("#player1-name-btn").hide();
+    $("#player1-name-txt").hide();
+    $("#player2-name-btn").hide();
+    $("#player2-name-txt").hide();
 }
 
 function showEnterGameForm(player) {
@@ -61,7 +81,10 @@ function isPlayerOnline(name, player) {
     // it returns waiting for a player instead of a null value
     if (name === "") {
         showLogs("No active player, Waiting for player now initiated");
-        showEnterGameForm(player);
+        showLogs("Cookie Name: " + readCookie("name"));
+        if (!readCookie("name")) {
+            showEnterGameForm(player);
+        }
         return "Waiting for a Player";
     } else {
         // hide the enter game field when user is online
@@ -84,25 +107,33 @@ $(".enter-game-btn").on("click", function (e) {
         showLogs("Player1 enter btn is clicked");
 
         // get the textbox value for player1
-        let player1Name = $("#player1-name-txt").val();
+        let getPlayer1Name = $("#player1-name-txt").val();
+        player1Name = isPlayerNameNull(getPlayer1Name, 1);
 
         // add player1 name to the database
-        db.ref("player1").update({ name: isPlayerNameNull(player1Name, 1) });
+        db.ref("player1").update({ name: player1Name });
+
+        //save this player in the cookie
+        document.cookie = "name=" + player1Name;
 
         // logs for degubbing
-        showLogs("Player1 name: " + isPlayerNameNull(player1Name, 1));
+        showLogs("Player1 name: " + player1Name);
 
     } else if ($(this).attr("id") == "player2-name-btn") {
         showLogs("Player2 enter btn is clicked");
 
         // get the textbox value for player1
-        let player2Name = $("#player2-name-txt").val();
+        let getPlayer2Name = $("#player1-name-txt").val();
+        player2Name = isPlayerNameNull(getPlayer2Name, 2);
 
         // add player1 name to the database
-        db.ref("player2").update({ name: isPlayerNameNull(player2Name, 2) });
+        db.ref("player1").update({ name: player2Name });
+
+        //save this player in the cookie
+        document.cookie = "name=" + player2Name;
 
         // logs for degubbing
-        showLogs("Player2 name: " + isPlayerNameNull(player2Name, 2));
+        showLogs("Player2 name: " + player2Name);
 
     }
 });
@@ -123,6 +154,7 @@ db.ref(".info/connected").on("value", function (snap) {
         showLogs("connected");
     } else {
         showLogs("not connected");
+
     }
 }, function (err) {
     showLogs(err);
