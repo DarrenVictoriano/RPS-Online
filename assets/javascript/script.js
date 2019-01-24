@@ -63,8 +63,13 @@ function hideEnterGameForm(player) {
 
 function showEnterGameForm(player) {
     // this functions hides the Enter Game Button and Textbox
-    $("#" + player + "-name-btn").show();
-    $("#" + player + "-name-txt").show();
+    // $("#" + player + "-name-btn").show();
+    // $("#" + player + "-name-txt").show();
+
+    $("#player1-name-btn").show();
+    $("#player1-name-txt").show();
+    $("#player2-name-btn").show();
+    $("#player2-name-txt").show();
 }
 
 function resetPlayerNames() {
@@ -91,10 +96,6 @@ function isPlayerOnline(name, player) {
         hideEnterGameForm(player);
         return name;
     }
-}
-
-function enableActionBTNs() {
-
 }
 
 // Event Handlers
@@ -127,7 +128,7 @@ $(".enter-game-btn").on("click", function (e) {
         player2Name = isPlayerNameNull(getPlayer2Name, 2);
 
         // add player1 name to the database
-        db.ref("player1").update({ name: player2Name });
+        db.ref("player2").update({ name: player2Name });
 
         //save this player in the cookie
         document.cookie = "name=" + player2Name;
@@ -142,6 +143,11 @@ db.ref().on("value", function (snap) {
     // show player names, cathirebase
     $("#player1").text(isPlayerOnline(snap.val().player1.name, "player1"));
     $("#player2").text(isPlayerOnline(snap.val().player2.name, "player2"));
+
+    // delete cookies if player name is empty
+    if (snap.val().player1.name === "" || snap.val().player2.name === "") {
+        document.cookie = "name=;";
+    }
 
 }, function (err) {
     showLogs("there's an error on value event");
