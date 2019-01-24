@@ -63,13 +63,8 @@ function hideEnterGameForm(player) {
 
 function showEnterGameForm(player) {
     // this functions hides the Enter Game Button and Textbox
-    // $("#" + player + "-name-btn").show();
-    // $("#" + player + "-name-txt").show();
-
-    $("#player1-name-btn").show();
-    $("#player1-name-txt").show();
-    $("#player2-name-btn").show();
-    $("#player2-name-txt").show();
+    $("#" + player + "-name-btn").show();
+    $("#" + player + "-name-txt").show();
 }
 
 function resetPlayerNames() {
