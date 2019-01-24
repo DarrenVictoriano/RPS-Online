@@ -118,11 +118,11 @@ $(".enter-game-btn").on("click", function (e) {
     } else if ($(this).attr("id") == "player2-name-btn") {
         showLogs("Player2 enter btn is clicked");
 
-        // get the textbox value for player1
-        let getPlayer2Name = $("#player1-name-txt").val();
+        // get the textbox value for player2
+        let getPlayer2Name = $("#player2-name-txt").val();
         player2Name = isPlayerNameNull(getPlayer2Name, 2);
 
-        // add player1 name to the database
+        // add player2 name to the database
         db.ref("player2").update({ name: player2Name });
 
         //save this player in the cookie
