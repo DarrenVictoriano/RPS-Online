@@ -149,6 +149,9 @@ db.ref().on("value", function (snap) {
         showLogs("cookie is empty string");
     } else if (readCookie("name") === null) {
         showLogs("cookie is null");
+    } else {
+        showLogs("cookie name is neither null or empty");
+        showLogs(typeof readCookie("name"))
     }
 
     // re-check cookie changes
