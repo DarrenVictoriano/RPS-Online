@@ -82,6 +82,7 @@ function isPlayerOnline(name, player) {
     if (name === "") {
         showLogs("No active player, Waiting for player now initiated");
         showLogs("Cookie Name: " + readCookie("name"));
+
         if (!readCookie("name")) {
             showEnterGameForm(player);
         }
@@ -99,7 +100,7 @@ $(".enter-game-btn").on("click", function (e) {
     // this will push the name to the firebase db
     e.preventDefault();
 
-    if ($(this).attr("id") == "player1-name-btn") {
+    if ($(this).attr("id") === "player1-name-btn") {
         showLogs("Player1 enter btn is clicked");
 
         // get the textbox value for player1
@@ -115,7 +116,7 @@ $(".enter-game-btn").on("click", function (e) {
         // logs for degubbing
         showLogs("Player1 name: " + player1Name);
 
-    } else if ($(this).attr("id") == "player2-name-btn") {
+    } else if ($(this).attr("id") === "player2-name-btn") {
         showLogs("Player2 enter btn is clicked");
 
         // get the textbox value for player2
@@ -141,8 +142,18 @@ db.ref().on("value", function (snap) {
 
     // delete cookies if player name is empty
     if (snap.val().player1.name === "" || snap.val().player2.name === "") {
-        document.cookie = "name=;";
+        document.cookie = "name=";
     }
+
+    if (readCookie("name") === "") {
+        showLogs("cookie is empty string");
+    } else if (readCookie("name") === null) {
+        showLogs("cookie is null");
+    }
+
+    // re-check cookie changes
+
+
 
 }, function (err) {
     showLogs("there's an error on value event");
