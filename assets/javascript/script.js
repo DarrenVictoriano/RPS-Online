@@ -53,12 +53,8 @@ function isPlayerNameNull(player, number) {
 
 function hideEnterGameForm(player) {
     // this functions hides the Enter Game Button and Textbox
-    // $("#" + player + "-name-btn").hide();
-    // $("#" + player + "-name-txt").hide();
-    $("#player1-name-btn").hide();
-    $("#player1-name-txt").hide();
-    $("#player2-name-btn").hide();
-    $("#player2-name-txt").hide();
+    $("#" + player + "-name-btn").hide();
+    $("#" + player + "-name-txt").hide();
 }
 
 function showEnterGameForm(player) {
@@ -111,6 +107,8 @@ $(".enter-game-btn").on("click", function (e) {
         db.ref("player1").update({ name: player1Name });
 
         //save this player in the cookie
+        // change this to local storage instead
+        // easier to test
         document.cookie = "name=" + player1Name;
 
         // logs for degubbing
@@ -142,16 +140,13 @@ db.ref().on("value", function (snap) {
 
     // delete cookies if player name is empty
     if (snap.val().player1.name === "" || snap.val().player2.name === "") {
-        document.cookie = "name=";
+        document.cookie = "name=none";
     }
 
-    if (readCookie("name") === "") {
-        showLogs("cookie is empty string");
-    } else if (readCookie("name") === null) {
-        showLogs("cookie is null");
+    if (readCookie("name") === "none") {
+        showLogs("cookie is now none");
     } else {
-        showLogs("cookie name is neither null or empty");
-        showLogs(typeof readCookie("name"))
+        showLogs("not none yet");
     }
 
     // re-check cookie changes
