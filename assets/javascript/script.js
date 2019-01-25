@@ -79,7 +79,7 @@ function isPlayerOnline(name, player) {
         showLogs("No active player, Waiting for player now initiated");
         showLogs("Cookie Name: " + readCookie("name"));
 
-        if (!readCookie("name")) {
+        if (readCookie("name") !== "none") {
             showEnterGameForm(player);
         }
         return "Waiting for a Player";
