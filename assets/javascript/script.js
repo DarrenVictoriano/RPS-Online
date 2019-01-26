@@ -76,6 +76,9 @@ function isPlayerOnline(name, player) {
         return name;
     }
 }
+// disabled buttons
+$(".ready-btn").prop("disabled", true);
+$(".action-btn-border").prop("disabled", true);
 
 // Event Handlers
 $(".enter-game-btn").on("click", function (e) {
@@ -99,6 +102,9 @@ $(".enter-game-btn").on("click", function (e) {
         // logs for degubbing
         showLogs("Player1 name: " + player1Name);
 
+        // enable ready for player 1
+        $("#ready-player1-btn").prop("disabled", false);
+
     } else if ($(this).attr("id") === "player2-name-btn") {
         showLogs("Player2 enter btn is clicked");
 
@@ -115,7 +121,30 @@ $(".enter-game-btn").on("click", function (e) {
         // logs for degubbing
         showLogs("Player2 name: " + player2Name);
 
+        // enable ready for player 2
+        $("#ready-player2-btn").prop("disabled", false);
+
     }
+});
+
+// ready button
+$(".ready-btn").on("click", function () {
+    if ($(this).attr("id") === "ready-player1-btn") {
+        // enable action buttons
+        $(".p1-btn").toggleClass("active-action-btn");
+        // disable ready
+        $("#ready-player1-btn").prop("disabled", true);
+    } else {
+        // enable action buttons
+        $(".p2-btn").toggleClass("active-action-btn");
+        // disable ready
+        $("#ready-player2-btn").prop("disabled", true);
+    }
+});
+
+// action btn
+$(".action-btn-border").on("click", function () {
+    console.log("asd");
 });
 
 // firebase value change event

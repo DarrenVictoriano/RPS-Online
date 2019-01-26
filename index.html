@@ -54,27 +54,30 @@
 
                 <!-- Game -->
                 <div class="col-sm-2 text-center">
+                    <!-- PLayer 1 action selection -->
                     <div class="action-btn-border">
-                        <div class="fas fa-hand-rock action-btn" data-fa-transform="rotate-90" data-action="r"></div>
+                        <div class="fas fa-hand-rock action-btn p1-btn" data-fa-transform="rotate-90" data-action="fas fa-hand-rock"></div>
                     </div>
 
                     <div class="action-btn-border">
-                        <div class="fas fa-hand-paper action-btn" data-fa-transform="rotate-90" data-action="p"></div>
+                        <div class="fas fa-hand-paper action-btn p1-btn" data-fa-transform="rotate-90" data-action="fas fa-hand-paper"></div>
                     </div>
 
                     <div class="action-btn-border">
-                        <div class="fas fa-hand-scissors action-btn" data-fa-transform="flip-h" data-action="s"></div>
+                        <div class="fas fa-hand-scissors action-btn p1-btn" data-fa-transform="flip-h" data-action="fas fa-hand-scissors"></div>
                     </div>
                 </div>
+
                 <div class="col-sm-10 text-center">
+                    <!-- Player 1 selected action -->
                     <div class="border border-dark rounded action-image-div">
-                        <div class="fas fa-hand-scissors action-icon-selected" data-fa-transform="flip-h"></div>
+                        <div class="action-icon-selected" data-fa-transform="" id="player1-selected-action"></div>
                     </div>
                 </div>
 
-                <!-- Ready -->
+                <!-- Ready Player 1 -->
                 <div class="col-sm-12 text-center p-0 mt-3 ready-player1">
-                    <button class="btn btn-primary ml-3 disabled" id="ready-player1-btn" aria-disabled="true">Ready</button>
+                    <button class="btn btn-primary ml-3 ready-btn" id="ready-player1-btn">Ready</button>
                 </div>
             </div>
         </div>
@@ -99,27 +102,32 @@
 
                 <!-- Game -->
                 <div class="col-sm-10 text-center">
+                    <!-- Player2 selected action -->
                     <div class="border border-dark rounded action-image-div">
-                        <div class="fas fa-hand-scissors action-icon-selected" data-fa-transform="" data-action="r"></div>
+                        <div class="action-icon-selected" data-fa-transform="" id="player2-selected-action"></div>
                     </div>
                 </div>
+
                 <div class="col-sm-2 text-center">
+                    <!-- Player 2 action selection -->
                     <div class="action-btn-border">
-                        <div class="fas fa-hand-rock action-btn" data-fa-transform="rotate-90 flip-h" data-action="p"></div>
+                        <div class="fas fa-hand-rock action-btn p2-btn" data-fa-transform="rotate-90 flip-h"
+                            data-action="fas fa-hand-rock"></div>
                     </div>
 
                     <div class="action-btn-border">
-                        <div class="fas fa-hand-paper action-btn" data-fa-transform="rotate-90 flip-h" data-action="s"></div>
+                        <div class="fas fa-hand-paper action-btn p2-btn" data-fa-transform="rotate-90 flip-h"
+                            data-action="fas fa-hand-paper"></div>
                     </div>
 
                     <div class="action-btn-border">
-                        <div class="fas fa-hand-scissors action-btn"></div>
+                        <div class="fas fa-hand-scissors action-btn p2-btn" data-fa-transform="" data-action="fas fa-hand-scissors"></div>
                     </div>
                 </div>
 
-                <!-- Ready -->
+                <!-- Ready player 2 -->
                 <div class="col-sm-12 text-center p-0 mt-3 ready-player1">
-                    <button class="btn btn-primary ml-3 disabled" id="ready-player1-btn" aria-disabled="true">Ready</button>
+                    <button class="btn btn-primary ml-3 ready-btn" id="ready-player2-btn">Ready</button>
                 </div>
             </div>
         </div>
