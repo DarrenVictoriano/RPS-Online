@@ -144,6 +144,7 @@ $(".ready-btn").on("click", function () {
 
 // action btn
 $(".action-btn-border").on("click", function () {
+    // hide div on load then show on ready click
     console.log("asd");
 });
 
