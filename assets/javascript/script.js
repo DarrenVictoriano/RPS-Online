@@ -24,20 +24,6 @@ function showLogs(str) {
     return;
 }
 
-function readCookie(name) {
-    // read the stored cookie
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(";");
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) === " ") c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) {
-            return c.substring(nameEQ.length, c.length);
-        }
-    }
-    return null;
-}
-
 function isPlayerNameNull(player, number) {
     // check if playerName is null
     // this is just to prevent firebase store undefined
@@ -51,10 +37,12 @@ function isPlayerNameNull(player, number) {
     }
 }
 
-function hideEnterGameForm(player) {
+function hideEnterGameForm() {
     // this functions hides the Enter Game Button and Textbox
-    $("#" + player + "-name-btn").hide();
-    $("#" + player + "-name-txt").hide();
+    $("#player1-name-btn").hide();
+    $("#player1-name-txt").hide();
+    $("#player2-name-btn").hide();
+    $("#player2-name-txt").hide();
 }
 
 function showEnterGameForm(player) {
@@ -77,15 +65,14 @@ function isPlayerOnline(name, player) {
     // it returns waiting for a player instead of a null value
     if (name === "") {
         showLogs("No active player, Waiting for player now initiated");
-        showLogs("Cookie Name: " + readCookie("name"));
 
-        if (readCookie("name") === "none") {
+        if (localStorage.getItem("playerOnline") === false) {
             showEnterGameForm(player);
         }
         return "Waiting for a Player";
     } else {
         // hide the enter game field when user is online
-        hideEnterGameForm(player);
+        hideEnterGameForm();
         return name;
     }
 }
@@ -107,9 +94,7 @@ $(".enter-game-btn").on("click", function (e) {
         db.ref("player1").update({ name: player1Name });
 
         //save this player in the cookie
-        // change this to local storage instead
-        // easier to test
-        document.cookie = "name=" + player1Name;
+        localStorage.setItem("playerOnline", player1Name);
 
         // logs for degubbing
         showLogs("Player1 name: " + player1Name);
@@ -125,7 +110,7 @@ $(".enter-game-btn").on("click", function (e) {
         db.ref("player2").update({ name: player2Name });
 
         //save this player in the cookie
-        document.cookie = "name=" + player2Name;
+        localStorage.setItem("playerOnline", player2Name);
 
         // logs for degubbing
         showLogs("Player2 name: " + player2Name);
@@ -133,24 +118,13 @@ $(".enter-game-btn").on("click", function (e) {
     }
 });
 
+// firebase value change event
 db.ref().on("value", function (snap) {
+    // this is called when there are changes in the firebase
+
     // show player names, cathirebase
-    $("#player1").text(isPlayerOnline(snap.val().player1.name, "player1"));
     $("#player2").text(isPlayerOnline(snap.val().player2.name, "player2"));
-
-    // delete cookies if player name is empty
-    if (snap.val().player1.name === "" || snap.val().player2.name === "") {
-        document.cookie = "name=none";
-    }
-
-    if (readCookie("name") === "none") {
-        showLogs("cookie is now none");
-    } else {
-        showLogs("not none yet");
-    }
-
-    // re-check cookie changes
-
+    $("#player1").text(isPlayerOnline(snap.val().player1.name, "player1"));
 
 
 }, function (err) {
@@ -158,14 +132,12 @@ db.ref().on("value", function (snap) {
     showLogs(err);
 });
 
-db.ref(".info/connected").on("value", function (snap) {
-    // detects if user is connected to database
-    if (snap.val() === true) {
-        showLogs("connected");
-    } else {
-        showLogs("not connected");
+$(window).on("beforeunload", function () {
+    // delete player name in firebase
+    // when user exits out of the website
+    db.ref("player1").update({ name: "" });
+    db.ref("player2").update({ name: "" });
 
-    }
-}, function (err) {
-    showLogs(err);
+    // set localStorage value to false
+    localStorage.setItem("playerOnline", false);
 });
