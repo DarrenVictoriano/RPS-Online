@@ -3,32 +3,35 @@ body {
     max-width: 100%;
 }
 
-.action-btn-border {
+.action-btn-border-p1, .action-btn-border-p2  {
     width: 60px;
     height: 60px;
     padding-top: 8px;
     margin-bottom: 10px;
     border-radius: 50%;
     background-color: #fff;
-    border: solid 2px gray;
-}
-.action-btn-border.active-action-btn {
-    border: solid 2px #000000;
+    border: solid 2px #000;
 }
 
 .action-btn {
     font-size: 40px;
-    color: gray;
-}
-.action-btn.active-action-btn {
     color: #000;
 }
 
-.action-btn-border:hover .action-btn {
+.action-btn-border-p1:hover .action-btn {
     color: gray;
 }
 
-.action-btn-border:hover {
+.action-btn-border-p1:hover {
+    background-color: #fff;
+    border: solid 2px gray;
+}
+
+.action-btn-border-p2:hover .action-btn {
+    color: gray;
+}
+
+.action-btn-border-p2:hover {
     background-color: #fff;
     border: solid 2px gray;
 }
@@ -46,3 +49,6 @@ body {
     min-height: 78px;
 }
 
+.col-sm-2 {
+    min-width: 72px;
+}
