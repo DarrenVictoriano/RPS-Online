@@ -76,9 +76,15 @@ function isPlayerOnline(name, player) {
         return name;
     }
 }
-// disabled buttons
-$(".ready-btn").prop("disabled", true);
-$(".action-btn-border").prop("disabled", true);
+
+$(document).ready(function () {
+    // disabled buttons
+    $(".ready-btn").prop("disabled", true);
+
+    // hide action selection
+    $(".action-btn-border-p1, .action-btn-border-p2").hide();
+});
+
 
 // Event Handlers
 $(".enter-game-btn").on("click", function (e) {
@@ -134,11 +140,15 @@ $(".ready-btn").on("click", function () {
         $(".p1-btn").toggleClass("active-action-btn");
         // disable ready
         $("#ready-player1-btn").prop("disabled", true);
+        // show action selection
+        $(".action-btn-border-p1").show();
     } else {
         // enable action buttons
         $(".p2-btn").toggleClass("active-action-btn");
         // disable ready
         $("#ready-player2-btn").prop("disabled", true);
+        // show action selection
+        $(".action-btn-border-p2").show();
     }
 });
 
