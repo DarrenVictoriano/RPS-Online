@@ -13,6 +13,8 @@ firebase.initializeApp(config);
 let db = firebase.database();
 let player1Name = "";
 let player2Name = "";
+let p1Action = "";
+let p2Action = "";
 let logsSwitch = true;
 
 // Game Functions
@@ -142,6 +144,8 @@ $(".ready-btn").on("click", function () {
         $("#ready-player1-btn").prop("disabled", true);
         // show action selection
         $(".action-btn-border-p1").show();
+        //set ready data on firebase
+        db.ref("player1").update({ ready: true });
     } else {
         // enable action buttons
         $(".p2-btn").toggleClass("active-action-btn");
@@ -149,6 +153,8 @@ $(".ready-btn").on("click", function () {
         $("#ready-player2-btn").prop("disabled", true);
         // show action selection
         $(".action-btn-border-p2").show();
+        //set ready data on firebase
+        db.ref("player2").update({ ready: true });
     }
 });
 
@@ -180,4 +186,8 @@ $(window).on("beforeunload", function () {
 
     // set localStorage value to false
     localStorage.setItem("playerOnline", false);
+
+    //set ready data on firebase to false
+    db.ref("player1").update({ ready: false });
+    db.ref("player2").update({ ready: false });
 });
