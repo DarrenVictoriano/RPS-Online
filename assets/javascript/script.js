@@ -142,8 +142,7 @@ $(".ready-btn").on("click", function () {
         $(".p1-btn").toggleClass("active-action-btn");
         // disable ready
         $("#ready-player1-btn").prop("disabled", true);
-        // show action selection
-        $(".action-btn-border-p1").show();
+
         //set ready data on firebase
         db.ref("player1").update({ ready: true });
     } else {
@@ -151,8 +150,7 @@ $(".ready-btn").on("click", function () {
         $(".p2-btn").toggleClass("active-action-btn");
         // disable ready
         $("#ready-player2-btn").prop("disabled", true);
-        // show action selection
-        $(".action-btn-border-p2").show();
+
         //set ready data on firebase
         db.ref("player2").update({ ready: true });
     }
@@ -172,6 +170,22 @@ db.ref().on("value", function (snap) {
     $("#player2").text(isPlayerOnline(snap.val().player2.name, "player2"));
     $("#player1").text(isPlayerOnline(snap.val().player1.name, "player1"));
 
+    if (snap.val().player1.ready === true) {
+        showLogs("player 1 is ready");
+    }
+
+    if (snap.val().player2.ready === true) {
+        showLogs("player 2 is ready");
+    }
+
+    if (snap.val().player1.ready === true && snap.val().player2.ready === true) {
+        if (localStorage.getItem(playerOnline) === player1Name) {
+            // show action selection
+            $(".action-btn-border-p1").show();
+        }
+        // show action selection
+        $(".action-btn-border-p2").show();
+    }
 
 }, function (err) {
     showLogs("there's an error on value event");
