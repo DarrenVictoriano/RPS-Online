@@ -69,7 +69,10 @@ function isPlayerOnline(name, player) {
         showLogs("No active player, Waiting for player now initiated");
 
         if (localStorage.getItem("playerOnline") === false) {
-            showEnterGameForm(player);
+            if (db.ref(player).getItem === "") {
+                showLogs(db.ref(player).getItem);
+                showEnterGameForm(player);
+            }
         }
         return "Waiting for a Player";
     } else {
