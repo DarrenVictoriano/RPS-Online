@@ -62,18 +62,12 @@ function resetPlayerNames() {
     showLogs("player.names are set to null!");
 }
 
-function isPlayerOnline(name, player) {
+function isPlayerOnline(name) {
     // this handles the empty name in firebase
     // it returns waiting for a player instead of a null value
     if (name === "") {
         showLogs("No active player, Waiting for player now initiated");
 
-        if (localStorage.getItem("playerOnline") === false) {
-            if (db.ref(player).getItem === "") {
-                showLogs(db.ref(player).getItem);
-                showEnterGameForm(player);
-            }
-        }
         return "Waiting for a Player";
     } else {
         // hide the enter game field when user is online
@@ -170,8 +164,8 @@ db.ref().on("value", function (snap) {
     // this is called when there are changes in the firebase
 
     // show player names, cathirebase
-    $("#player2").text(isPlayerOnline(snap.val().player2.name, "player2"));
-    $("#player1").text(isPlayerOnline(snap.val().player1.name, "player1"));
+    $("#player2").text(isPlayerOnline(snap.val().player2.name));
+    $("#player1").text(isPlayerOnline(snap.val().player1.name));
 
     if (snap.val().player1.ready === true) {
         showLogs("player 1 is ready");
@@ -185,9 +179,19 @@ db.ref().on("value", function (snap) {
         if (localStorage.getItem(playerOnline) === player1Name) {
             // show action selection
             $(".action-btn-border-p1").show();
+        } else {
+            // show action selection
+            $(".action-btn-border-p2").show();
         }
+    }
+
+    if (localStorage.getItem(playerOnline) === player1Name) {
         // show action selection
-        $(".action-btn-border-p2").show();
+        showEnterGameForm("player2");
+    } else {
+        // show action selection
+        showEnterGameForm("player1");
+
     }
 
 }, function (err) {
@@ -202,7 +206,7 @@ $(window).on("beforeunload", function () {
     db.ref("player2").update({ name: "" });
 
     // set localStorage value to false
-    localStorage.setItem("playerOnline", false);
+    localStorage.setItem("playerOnline", "false");
 
     //set ready data on firebase to false
     db.ref("player1").update({ ready: false });
