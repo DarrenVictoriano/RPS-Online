@@ -176,7 +176,7 @@ db.ref().on("value", function (snap) {
     }
 
     if (snap.val().player1.ready === true && snap.val().player2.ready === true) {
-        if (localStorage.getItem(playerOnline) === player1Name) {
+        if (localStorage.getItem("playerOnline") === player1Name) {
             // show action selection
             $(".action-btn-border-p1").show();
         } else {
@@ -185,7 +185,7 @@ db.ref().on("value", function (snap) {
         }
     }
 
-    if (localStorage.getItem(playerOnline) === player1Name) {
+    if (localStorage.getItem("playerOnline") === player1Name) {
         // show action selection
         showEnterGameForm("player2");
     } else {
